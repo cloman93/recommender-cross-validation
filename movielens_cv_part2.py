@@ -21,18 +21,19 @@ f.close()
 userid_to_numratings = dict()
 for key in all_data:
 	userid_to_numratings[key] = len(all_data[key])
-output_file = open('sample_output.txt')
+output_file = open('X_train_1_out.txt')
 counter = 0
 summation = 0
 new_sum = 0
 user_gain = 0
-threshold = 3 #for calculating user gain, this assumes that users want items that have at least a [threshold] star rating
+threshold = 4 #for calculating user gain, this assumes that users want items that have at least a [threshold] star rating
 for line in output_file:
 	results = line.split('\t')
 	curr_user_dict = all_data[results[0]] #this is the original ratings
 	ratings = results[1].split(',')
 	ratings2 = ratings[1:]
 	ratings3 = ratings2[:len(ratings2)-1]
+	checker = 0
 	for r in ratings3:
 		split_rating = r.split(':')
 		itemid = split_rating[0]
@@ -52,9 +53,10 @@ for line in output_file:
 			#print "Movie ID: " + itemid
 			#print "Predicted Rating: " + split_rating[1]
 			#print "Actual Rating: " + curr_user_dict[itemid]
-			
+			checker += 1
 		rating = split_rating[1]
 		#print itemid + ":" + rating
+	print checker
 print "Mean Absolute Error: " + str((1/float(counter)) * summation)
 print "Mean User Gain: " + str((1/float(counter)) * user_gain)
 print "Average Predicted Rating: " + str((1/float(counter)) * new_sum)
