@@ -26,8 +26,8 @@ def kfold_cv(data, K):
 		counter+=1
 	X_train, X_test = cross_validation.train_test_split(X, test_size=(1/float(K)), random_state=0)
 
-	write_file(X_train, 'X_train_1.csv')
-	write_file(X_test, 'X_test_1.csv')
+	write_file(X_train, 'X_train_3.csv')
+	write_file(X_test, 'X_test_3.csv')
 
 def main():
 	data = sys.argv[1]
